@@ -1,0 +1,31 @@
+//Characters for password
+const characters = {
+    lower: 'abcdefghijklmnopqrstuvwxyz',
+    upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    number: '0123456789',
+    symbol: '!@#$%^&*()_+~`|}{[]\:;?><,./-='
+}
+
+//function to get random element from key and random characters from selected value
+function pullRanValue(obj){
+    const keys = Object.keys(obj); //returns the keys from selected object
+    const randomKey = keys[Math.floor(Math.random() * keys.length)] //math.floor in place to take the randomly selected key and round it down to a valid index
+    //create a loop that loops through the value
+    const randomValue =  obj[randomKey]//use more variables, very useful!
+    const randomIndex = Math.floor(Math.random() * randomValue.length) //give A random index 
+    return randomValue[randomIndex]
+}
+
+console.log(pullRanValue(characters))
+
+//function to generate password based on characters needed
+function generatePassword(num, obj) {
+    let password = '';
+for (let i = 0; i < num; i++){
+    password += pullRanValue(obj)
+}
+return password
+}
+
+//passwords work but unsafe due to the chance of getting multiple of the same value 
+console.log(generatePassword(12, characters))
